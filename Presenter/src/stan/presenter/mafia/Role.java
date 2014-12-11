@@ -3,6 +3,8 @@ package stan.presenter.mafia;
 public class Role
         extends Mafia
 {
+    public Action act;//
+    //
     public static enum TypeVisibility//тип видимости для ролей со способностью проверки
     {
         mafia,
@@ -17,6 +19,7 @@ public class Role
     private TypeVisibility TV;
     private TypeRole TR;
     private boolean selfie;//возможность действовать на себя
+    //
     public TypeVisibility Get_TV()
     {
         return this.TV;
@@ -40,5 +43,22 @@ public class Role
     public void Set_selfie(boolean s)
     {
         this.selfie = s;
+    }
+    public Role clone()
+    {
+        return new Role(this.name, this.TR, this.TV, this.selfie, this.act);
+    }
+    public Role clone(String n, Action a)
+    {
+        return new Role(n, this.TR, this.TV, this.selfie, a);
+    }
+    //
+    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a)
+    {
+        super(n);
+        this.TR = tr;
+        this.TV = tv;
+        this.selfie = s;
+        this.act = a;
     }
 }
