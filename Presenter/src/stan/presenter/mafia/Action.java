@@ -3,7 +3,7 @@ package stan.presenter.mafia;
 public class Action
         extends Mafia
 {
-    public static class Kill
+    public static class Kill//попытка убийства
             extends Action
     {
         public Kill() 
