@@ -20,6 +20,9 @@ public class Role
     private TypeRole TR;
     private boolean selfie;//возможность действовать на себя
     //
+    public boolean rang_shot;//возможность стрелять при разделении на ранги
+    public int rang;//степень ранга ( 1 - главный / 5 - второстепенный / -1 - нет ранга)
+    //
     public TypeVisibility Get_TV()
     {
         return this.TV;
@@ -44,13 +47,13 @@ public class Role
     {
         this.selfie = s;
     }
-    public Role clone()
-    {
-        return new Role(this.name, this.TR, this.TV, this.selfie, this.act);
-    }
     public Role clone(String n, Action a)
     {
-        return new Role(n, this.TR, this.TV, this.selfie, a);
+        return new Role(n, this.TR, this.TV, this.selfie, a, this.rang_shot, this.rang);
+    }
+    public Role clone()
+    {
+        return new Role(this.name, this.TR, this.TV, this.selfie, this.act, this.rang_shot, this.rang);
     }
     //
     public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a)
@@ -60,5 +63,17 @@ public class Role
         this.TV = tv;
         this.selfie = s;
         this.act = a;
+        this.rang_shot = false;
+        this.rang = -1;
+    }
+    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a, boolean rs, int r)
+    {
+        super(n);
+        this.TR = tr;
+        this.TV = tv;
+        this.selfie = s;
+        this.act = a;
+        this.rang_shot = rs;
+        this.rang = r;
     }
 }
