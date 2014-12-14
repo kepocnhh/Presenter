@@ -3,7 +3,7 @@ package stan.presenter.mafia;
 public class Role
         extends Mafia
 {
-    public Action act;//
+    public Action[] act;//
     //
     public static enum TypeVisibility//тип видимости для ролей со способностью проверки
     {
@@ -47,33 +47,68 @@ public class Role
     {
         this.selfie = s;
     }
-    public Role clone(String n, Action a)
+    public Role clone(String n, int r)
     {
-        return new Role(n, this.TR, this.TV, this.selfie, a, this.rang_shot, this.rang);
+        Action[] new_act = new Action[this.act.length];
+        for(int i=0;i<this.act.length;i++)
+        {
+            new_act[i] = this.act[i].clone();
+        }
+        return new Role(n, this.TR, this.TV, this.selfie, new_act, this.rang_shot, r, this.UI);
+    }
+    public Role clone(String n, Action[] a)
+    {
+        return new Role(n, this.TR, this.TV, this.selfie, a, this.rang_shot, this.rang, this.UI);
     }
     public Role clone()
     {
-        return new Role(this.name, this.TR, this.TV, this.selfie, this.act, this.rang_shot, this.rang);
+        Action[] new_act = new Action[this.act.length];
+        for(int i=0;i<this.act.length;i++)
+        {
+            new_act[i] = this.act[i].clone();
+        }
+        return new Role(this.name, this.TR, this.TV, this.selfie, new_act, this.rang_shot, this.rang, this.UI);
     }
     //
+    
+    private void set_config(Role.TypeRole tr, Role.TypeVisibility tv, boolean s, int ui)
+    {
+        this.TR = tr;
+        this.TV = tv;
+        this.selfie = s;
+        this.UI = ui;
+    }
+    private void set_rang(boolean rs, int r)
+    {
+        this.rang_shot = rs;
+        this.rang = r;
+    }
+    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action[] a, boolean rs, int r, int ui)
+    {
+        super(n);
+        set_config(tr,tv,s,ui);
+        set_rang(rs,r);
+        this.act = a;
+    }
+    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a, boolean rs, int r, int ui)
+    {
+        super(n);
+        set_config(tr,tv,s,ui);
+        set_rang(rs,r);
+        this.act = new Action[]{a};
+    }
     public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a)
     {
         super(n);
-        this.TR = tr;
-        this.TV = tv;
-        this.selfie = s;
-        this.act = a;
-        this.rang_shot = false;
-        this.rang = -1;
+        set_config(tr,tv,s,-1);
+        set_rang(false,-1);
+        this.act = new Action[]{a};
     }
-    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv, boolean s, Action a, boolean rs, int r)
+    public Role(String n, Role.TypeRole tr, Role.TypeVisibility tv)
     {
         super(n);
-        this.TR = tr;
-        this.TV = tv;
-        this.selfie = s;
-        this.act = a;
-        this.rang_shot = rs;
-        this.rang = r;
+        set_config(tr,tv,false,-1);
+        set_rang(false,-1);
+        this.act = null;
     }
 }

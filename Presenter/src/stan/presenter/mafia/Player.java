@@ -35,8 +35,14 @@ public class Player
         {
             if(role.act!=null)
             {
-                role.act.from = -1;
-                role.act.to = -1;
+                for(int i = 0; i < role.act.length; i++)
+                {
+                    if(role.act[i]!=null)
+                    {
+                        role.act[i].from = -1;
+                        role.act[i].to = -1;
+                    }
+                }
             }
         }
     }

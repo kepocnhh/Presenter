@@ -16,6 +16,12 @@ public class Action
             p.life = false;
             return p;
         }
+        //
+        @Override
+        public Kill clone()
+        {
+            return new Kill();
+        }
     }
     public static class Jail
             extends Action
@@ -46,6 +52,12 @@ public class Action
         {
             p.stop = true;
             return p;
+        }
+        //
+        @Override
+        public Violence clone()
+        {
+            return new Violence();
         }
     }
     public static class Doctor_heal
@@ -79,5 +91,10 @@ public class Action
         try_stop = false;
         to = -1;
         from = -1;
+    }
+    //
+    public Action clone()
+    {
+        return new Action(this.name);
     }
 }
