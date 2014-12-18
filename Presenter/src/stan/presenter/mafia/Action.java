@@ -6,9 +6,10 @@ public class Action
     public static class Kill//попытка убийства
             extends Action
     {
-        public Kill() 
+        public Kill(boolean s) 
         {
             super("Убивает");
+            selfie = s;
         }
         @Override
         public Player engage(Player p)
@@ -20,7 +21,7 @@ public class Action
         @Override
         public Kill clone()
         {
-            return new Kill();
+            return new Kill(this.selfie);
         }
     }
     public static class Jail
@@ -66,6 +67,7 @@ public class Action
         public Doctor_heal() 
         {
             super("Лечит");
+            selfie = true;
         }
         @Override
         public Player engage(Player p)
@@ -75,6 +77,7 @@ public class Action
         }
     }
     //
+    public boolean selfie;//возможность действовать на себя
     public int to;
     public int from;
     public boolean try_stop;
@@ -91,6 +94,7 @@ public class Action
         try_stop = false;
         to = -1;
         from = -1;
+        selfie = false;
     }
     //
     public Action clone()
