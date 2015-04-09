@@ -96,9 +96,17 @@ public class Action
         from = -1;
         selfie = false;
     }
+    private Action(String n, boolean ts, int t, int f, boolean s)
+    {
+        super(n);
+        try_stop = ts;
+        to = t;
+        from = f;
+        selfie = s;
+    }
     //
     public Action clone()
     {
-        return new Action(this.name);
+        return new Action(this.name, this.try_stop, this.to, this.from, this.selfie);
     }
 }
