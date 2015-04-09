@@ -39,6 +39,11 @@ public class Action
             p.stop = true;
             return p;
         }
+        @Override
+        public Jail clone()
+        {
+            return new Jail();
+        }
     }
     public static class Violence
             extends Action
@@ -74,6 +79,11 @@ public class Action
         {
             p.heal_night = true;
             return p;
+        }
+        @Override
+        public Doctor_heal clone()
+        {
+            return new Doctor_heal();
         }
     }
     //
